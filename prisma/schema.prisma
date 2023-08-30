@@ -6,7 +6,13 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_DATABASE_URL")
+}
+
+model Todo {
+  id        Int      @id @default(autoincrement())
+  content   String
+  done      Boolean  @default(false)
 }

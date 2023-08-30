@@ -3,16 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "env": "dotenv -e .env.local",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:start": "docker compose -f .docker/docker-compose.yml up -d --build --remove-orphans",
+    "db:stop": "docker compose -f .docker/docker-compose.yml down",
+    "db:generate": "prisma generate",
+    "db:migrate": "dotenv -e .env.local -- prisma migrate dev",
+    "db:push": "dotenv -e .env.local -- prisma db push",
+    "db:seed": "dotenv -e .env.local -- prisma db seed",
+    "db:reset": "dotenv -e .env.local -- prisma db reset --force"
   },
   "dependencies": {
+    "@prisma/client": "^5.2.0",
+    "@tanstack/react-query": "^4.32.6",
+    "@trpc/client": "^10.37.1",
+    "@trpc/react-query": "^10.37.1",
+    "@trpc/server": "^10.37.1",
     "@types/node": "20.5.0",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
+    "better-sqlite3": "^8.5.0",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.16",
     "next": "13.4.16",
@@ -20,6 +34,13 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "zod": "^3.22.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.4",
+    "dotenv-cli": "^7.3.0",
+    "node-gyp": "^9.4.0",
+    "prisma": "^5.2.0"
   }
 }
